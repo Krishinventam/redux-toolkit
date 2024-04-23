@@ -1,13 +1,15 @@
+import { DEPOSIT, WITHDRAW } from "../types"
+
  const reducer = ( state=0 , action)=> {
 
-    if(action.type === 'deposit'){
+    if(action.type === DEPOSIT){
         return state + action.payload
     }
-    else if(action.type === 'withdraw'){
+    else if(action.type === WITHDRAW){
         return state - action.payload
     }
     else {
-        return state
+        return state 
     }
 }
 export default reducer

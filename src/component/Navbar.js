@@ -1,8 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch} from "react-redux";
+import { setLoading, setProject, setTask } from '../stateA/action-creatorsA/index';
 
 const Navbar = () => {
     const amount = useSelector(state=>state.amount)
+    const startState = useSelector(state => state.startState)
+  console.log('startState' , startState);
+const dispatch = useDispatch()
+ const { loading, project, task } = useSelector(state => state);
+ const toggleLoading = () => {
+  dispatch(setLoading(!loading ));
+};
+  
+const handleSetProject = () => {
+  dispatch(setProject(project));
+};
+
+const handleSetTask = () => {
+  dispatch(setTask(task));
+};
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,10 +54,18 @@ const Navbar = () => {
               
             </ul>
     <button disabled={true} className="btn-primary"> Your Balance: {amount}</button>
+    
+    <button onClick={toggleLoading}>
+          {loading ? 'Stop Loading' : 'Start Loading'}
+        </button>
+        <button onClick={handleSetProject}>Set Project </button>
+        <button onClick={handleSetTask}>Set Task</button>
+
           </div>
         </div>
       </nav>
     </div>
+ 
   );
 };
 

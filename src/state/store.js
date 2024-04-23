@@ -1,5 +1,9 @@
 import { applyMiddleware, legacy_createStore } from "redux";
-import reducers from "./reducers/index";
+import reducers from "./reducers";
 import { thunk } from "redux-thunk";
+import { composeWithDevTools } from '@redux-devtools/extension';
 
-export const store = legacy_createStore(reducers, {}, applyMiddleware(thunk));
+export const store = legacy_createStore(reducers, {},composeWithDevTools( applyMiddleware(thunk) ));
+
+
+
