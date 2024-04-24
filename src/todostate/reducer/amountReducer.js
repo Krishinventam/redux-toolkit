@@ -2,10 +2,15 @@ import {
   ADD_TODO,
   DELETE_TODO,
   COMPLETE_TODO,
+  TODOS_START,
+  TODOS_PASS,
+  TODOS_FAIL,
 } from "../../state/types";
 
 const startState = {
   todos: [],
+  loading:false,
+  error:null
 };
 
 export const todosReducer = (state = startState, action) => {
@@ -36,6 +41,20 @@ export const todosReducer = (state = startState, action) => {
             : todo
         ),
       };
+case TODOS_START:
+  return{
+    ...state,loading:true,error:null
+  }
+
+  case TODOS_PASS:
+    return{
+      ...state ,loading:false,todos: action.payload 
+    }
+
+    case TODOS_FAIL:
+      return{
+        ...state ,loading:false,error: action.payload 
+      }
 
     default:
       return state;
