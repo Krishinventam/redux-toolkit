@@ -5,7 +5,8 @@ import {Provider, useDispatch, useSelector} from 'react-redux';
 import Navbar from "./component/Navbar";
 import Shop from "./component/Shop";
 import store from "./storetoolkit";
-import Todo from "./component/TodoList/todo";
+import Todo from "./redux-toolkit/Todo";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function App() {
     )} */}
   </div>
   <Provider store={store}>
-    {/* <Todo/> */}
+    <Todo/>
 
   </Provider>
   </>

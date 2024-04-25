@@ -4,8 +4,6 @@ import { setLoading, setProject, setTask } from '../stateA/action-creatorsA/inde
 
 const Navbar = () => {
     const amount = useSelector(state=>state.amount)
-    const startState = useSelector(state => state.startState)
-  console.log('startState' , startState);
 const dispatch = useDispatch()
  const { loading, project, task } = useSelector(state => state);
  const toggleLoading = () => {
