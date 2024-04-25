@@ -8,10 +8,10 @@ import {
 } from "../../state/types";
 import axios from "axios";
 
-export const addTodo = (text) => ({
+export const addTodo = (title) => ({
   type: ADD_TODO,
   payload: {
-    text,
+    title,
   },
 });
 
@@ -43,17 +43,3 @@ export const fetchTodos = () => {
       });
   };
 };
-
-// export const postTodos = () =>{
-//   return (dispatch) => {
-//     dispatch({ type: TODOS_START});
-//     axios.post("https://jsonplaceholder.typicode.com/todos")
-//     .then((res)=>{
-//       const todos = res.data
-//       dispatch({type: TODOS_PASS , payload:todos})
-//     })
-//     .catch((error) =>{
-//       dispatch({type: TODOS_PASS, payload:error.message})
-//     })
-//   }
-// }

@@ -12,17 +12,15 @@ const HandleTodo = ({ todos}) => {
           key={todo.id}
           style={{ textDecoration: todo.completed ? "line-through" : "none" }}
         >
-          {todo.text}
+       {todo.title} 
           <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
-          {todo.completed ? (
+         
             <button onClick={() => dispatch(completeTodo(todo.id))}>
-              Mark Incomplete
+            {todo.completed ? 
+             "Mark Incomplete" : "Complete"
+            }
             </button>
-          ) : (
-            <button onClick={() => dispatch(completeTodo(todo.id))}>
-              Complete
-            </button>
-          )}
+        
         </li>
       ))}
     </ul>

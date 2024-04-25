@@ -22,7 +22,7 @@ export const todosReducer = (state = startState, action) => {
           ...state.todos,
           {
             id: state.todos.length + 1,
-            text: action.payload.text,
+            title: action.payload.title,
             completed: false,
           },
         ],

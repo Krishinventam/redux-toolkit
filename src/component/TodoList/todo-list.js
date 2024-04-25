@@ -14,10 +14,10 @@ const TodoList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const text = e.target.todoText.value;
-    if (text) {
-      dispatch(addTodo(text));
-      e.target.todoText.value = '';
+    const title = e.target.todoTitle.value;
+    if (title) {
+      dispatch(addTodo(title));
+      e.target.todoTitle.value = '';
     }
   };
 
@@ -28,7 +28,7 @@ const TodoList = () => {
     <div>
       <h2>Todo List</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="todoText" placeholder="Enter a new task" />
+        <input type="title" name="todoTitle" placeholder="Enter a new task" />
         <button type="submit">Add Task</button>
       </form>
 
