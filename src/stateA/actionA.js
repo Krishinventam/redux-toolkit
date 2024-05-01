@@ -1,1 +1,0 @@
-export * as Actioncreators from '../stateA/action-creatorsA/index'
