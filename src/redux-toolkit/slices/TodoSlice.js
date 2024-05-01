@@ -3,7 +3,6 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
-console.log("URL", BASE_URL);
 const laststate = {
   posts: [],
   loading: false,
@@ -15,7 +14,6 @@ const laststate = {
 };
 export const fetchPosts = createAsyncThunk("fetchPosts", async () => {
   const response = await axios.get(`${BASE_URL}/todos`);
-  console.log(response.data);
   return response?.data.slice(0, 3);
 });
 

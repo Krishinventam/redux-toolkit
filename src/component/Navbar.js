@@ -1,21 +1,21 @@
 import React from "react";
 import { useSelector ,useDispatch} from "react-redux";
-import { setLoading, setProject, setTask } from '../stateA/action-creatorsA/index';
+// import { setLoading, setProject, setTask } from '../stateA/action-creatorsA/index';
 
 const Navbar = () => {
     const amount = useSelector(state=>state.amount)
 const dispatch = useDispatch()
  const { loading, project, task } = useSelector(state => state);
  const toggleLoading = () => {
-  dispatch(setLoading(!loading ));
+  // dispatch(setLoading(!loading ));
 };
   
 const handleSetProject = () => {
-  dispatch(setProject(project));
+  // dispatch(setProject(project));
 };
 
 const handleSetTask = () => {
-  dispatch(setTask(task));
+  // dispatch(setTask(task));
 };
 
   return (

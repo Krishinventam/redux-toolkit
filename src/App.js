@@ -4,14 +4,13 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 // import {deleteAll} from './todostate/action/index';
 import Navbar from "./component/Navbar";
 import Shop from "./component/Shop";
-import store from "./storetoolkit";
 import Todo from "./redux-toolkit/reducer/Todo";
 import { toolkitStore } from "./store/store";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const todos = useSelector((state) => state.operationsReducer);
+  // const todos = useSelector((state) => state.operationsReducer);
 
   return (
     <>
