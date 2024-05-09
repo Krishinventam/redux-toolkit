@@ -6,6 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { legacyStore, toolkitStore } from "./store/store";
 import Todo from "./redux-toolkit/reducer/Todo";
+import { UserList } from "./component/Table/table";
+import { AddUser } from "./component/Table/adduser";
+import { EditUser } from "./component/Table/edituser";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +19,9 @@ root.render(
     {/* </Provider> */}
     <Provider store={toolkitStore}>
       <Todo />
+      {/* <UserList/>
+      <AddUser/> */}
+      {/* <EditUser/> */}
     </Provider>
   </React.StrictMode>
 );

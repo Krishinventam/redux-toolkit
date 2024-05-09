@@ -6,6 +6,8 @@ import Navbar from "./component/Navbar";
 import Shop from "./component/Shop";
 import Todo from "./redux-toolkit/reducer/Todo";
 import { toolkitStore } from "./store/store";
+import { UserList } from "./component/Table/table";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   // const dispatch = useDispatch();
@@ -21,7 +23,12 @@ function App() {
         <h1 className="text-center">TODO-APP USING REACT-REDUX</h1>
 
         {/* <Form/> */}
-        <TodoList />
+        <BrowserRouter>
+        <Routes>
+<Route path = '/todo' element = {<TodoList/>}/>
+        </Routes>
+        </BrowserRouter>
+        {/* <TodoList /> */}
         {/* {todos > 1&&(
       <button className='btn btn-danger btn-md delete-all'
       onClick={()=>dispatch(deleteAll())}>DELETE ALL</button>
@@ -31,6 +38,7 @@ function App() {
       {/* <Todo/> */}
 
       {/* </Provider> */}
+      
     </>
   );
 }
