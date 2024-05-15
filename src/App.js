@@ -8,6 +8,8 @@ import Todo from "./redux-toolkit/reducer/Todo";
 import { toolkitStore } from "./store/store";
 import { UserList } from "./component/Table/table";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DataGridTable from "./component/DatagridTable/datagridtable";
+import UpdateUserListView from "./component/DatagridTable/datagridtable";
 
 function App() {
   // const dispatch = useDispatch();
@@ -25,7 +27,8 @@ function App() {
         {/* <Form/> */}
         <BrowserRouter>
         <Routes>
-<Route path = '/todo' element = {<TodoList/>}/>
+{/* <Route path = '/' element = {<TodoList/>}/>
+<Route path = '/table' element = {<DataGridTable/>}/> */}
         </Routes>
         </BrowserRouter>
         {/* <TodoList /> */}

@@ -2,54 +2,70 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { instance } from "../../axios-instance/instances";
 
 const firststate = {
-  posts: [],
+  technology: [],
   loading: false,
   error: null,
-  currentProject: { name: "New Project ", owner: "Krish Shah" },
-  currentTask: { task: "New Task", priority: "Moderate" },
 };
 export const fetchTechnology = createAsyncThunk(
   "technology/fetchTechnology",
-  async () => {
-    const response = await instance.get("/teck/");
+  async (rejectWithValue) => {
+    try {
+      const response = await instance.get("/teck/");
 
-    return response.data;
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
-export const postTechnology = createAsyncThunk(
-  "posts/fetchTechnology",
-  async () => {
-    const response = await instance.post("/teck/", technologySlice);
+export const addTechnology = createAsyncThunk(
+  "technology/addTechnology",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await instance.post("/teck/", data);
 
-    return response.data;
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const getTechnology = createAsyncThunk(
-  "get/id/fetchTechnology",
-  async () => {
-    const response = await instance.get("/teck/3/", technologySlice);
-
-    return response.data;
+  "technology/getTechnology",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await instance.get(`/teck/${id}/`);
+      // console.log("response", response);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
-export const putTechnology = createAsyncThunk(
-  "put/fetchTechnology",
-  async () => {
-    const response = await instance.put("/teck/3/", technologySlice);
-
-    return response.data;
+export const editTechnology = createAsyncThunk(
+  "technology/editTechnology",
+  async (newData, { rejectWithValue }) => {
+    try {
+      const response = await instance.put(`/teck/${newData.id}/`, newData);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const deleteTechnology = createAsyncThunk(
-  "delete/fetchTechnology",
-  async () => {
-    const response = await instance.delete("/teck/1/", technologySlice);
-
-    return response.data;
+  "technology/deleteTechnology",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await instance.delete(`teck/${id}/`);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
@@ -58,12 +74,26 @@ const technologySlice = createSlice({
   initialState: firststate,
 
   reducers: {
-    settingProject: (state, action) => {
-      state.Project = action.payload;
+    technologyAdd(state, action) {
+      const newtechnology = {
+        id: state.length + 1,
+        name: action.payload,
+        completed: false,
+      };
+      state.technology.push(newtechnology);
     },
-
-    settingTask: (state, action) => {
-      state.Task = action.payload;
+    technologyUpdate(state, action) {
+      const index = state.technology.findIndex(
+        (technology) => technology.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.technology[index] = action.payload;
+      }
+    },
+    technologyDelete(state, action) {
+      state.technology = state.technology.filter(
+        (technology) => technology.id !== action.payload.id
+      );
     },
   },
   extraReducers(builder) {
@@ -74,13 +104,50 @@ const technologySlice = createSlice({
       })
       .addCase(fetchTechnology.fulfilled, (state, action) => {
         state.loading = false;
-        state.posts = action.payload;
+        state.technology = action.payload;
       })
       .addCase(fetchTechnology.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(addTechnology.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addTechnology.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technology = action.payload;
+      })
+      .addCase(addTechnology.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(editTechnology.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editTechnology.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technology = action.payload;
+      })
+      .addCase(editTechnology.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deleteTechnology.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTechnology.fulfilled, (state, action) => {
+        state.loading = false;
+        state.technology.filter = action.payload.id;
+      })
+      .addCase(deleteTechnology.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
   },
 });
-export const { settingProject, settingTask } = technologySlice.actions;
+export const { technologyAdd, technologyUpdate, technologyDelete } =
+  technologySlice.actions;
 export default technologySlice.reducer;
