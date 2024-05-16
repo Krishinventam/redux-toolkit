@@ -4,36 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { legacyStore, toolkitStore } from "./store/store";
-import Todo from "./redux-toolkit/reducer/Todo";
-import { UserList } from "./component/Table/table";
-import { AddUser } from "./component/Table/adduser";
-import { EditUser } from "./component/Table/edituser";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DataGridTable from "./component/DatagridTable/datagridtable";
-import Technologyform from "./TechnologyForm/technologyform";
+import { toolkitStore } from "./store/store";
+
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Provider store={legacyStore}> */}
-    {/* <App /> */}
-
-    {/* </Provider> */}
     <Provider store={toolkitStore}>
       <BrowserRouter>
-      <Routes>
-      <Route path = '/' element = {<Todo/>}/>
-<Route path = '/table' element = {<DataGridTable/>}/>
-<Route path = '/tech-form' element = {<Technologyform/>}/>
-<Route path = '/tech-form/new' element = {<Technologyform/>}/>
-<Route path= '/tech-form/:id' element= {<Technologyform/>}/>
-      </Routes>
+        <App />
       </BrowserRouter>
-      {/* <Todo /> */}
-      {/* <UserList/>
-      <AddUser/> */}
-      {/* <EditUser/> */}
     </Provider>
   </React.StrictMode>
 );

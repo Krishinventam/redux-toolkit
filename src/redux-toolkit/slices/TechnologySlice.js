@@ -21,7 +21,7 @@ export const fetchTechnology = createAsyncThunk(
 
 export const addTechnology = createAsyncThunk(
   "technology/addTechnology",
-  async (data, { rejectWithValue }) => {
+  async ( data, { rejectWithValue }) => {
     try {
       const response = await instance.post("/teck/", data);
 
@@ -65,7 +65,7 @@ export const deleteTechnology = createAsyncThunk(
       return response?.data;
     } catch (error) {
       return rejectWithValue(error.message);
-    }
+    } 
   }
 );
 

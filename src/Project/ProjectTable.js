@@ -10,13 +10,14 @@ import {
   GridActionsCellItem,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteTechnology,
-  fetchTechnology,
-  
-} from "../../redux-toolkit/slices/TechnologySlice";
+// import {
+//   deleteTechnology,
+//   fetchTechnology,
+
+// } from "../../redux-toolkit/slices/TechnologySlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { deleteProject, fetchProject } from "../redux-toolkit/slices/ProjectTableSlice"
 
 function EditToolbar({ handleNavigate }) {
   return (
@@ -32,26 +33,24 @@ function EditToolbar({ handleNavigate }) {
   );
 }
 
-export default function DataGridTable() {
+export default function ProjectTable() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const technology =
-    useSelector((state) => state.technology.technology.data) || [];
-
+  const project = useSelector((state) => state.project.project.data) || [];
   useEffect(() => {
-    dispatch(fetchTechnology());
+    dispatch(fetchProject());
   }, []);
 
   const [rows, setRows] = React.useState();
   const [rowModesModel, setRowModesModel] = React.useState({});
 
   const handleNavigate = (id) => {
-    navigate(`/technology/${id || "new"}`);
+    navigate(`/project/${id || "new"}`);
   };
 
-  const handleDeleteClick = ({id}) => {
-    dispatch(deleteTechnology({ id }));
-    dispatch(fetchTechnology({ id }));
+  const handleDeleteClick = (id) => {
+    dispatch(deleteProject({ id }));
+    dispatch(fetchProject({ id }));
   };
 
   const columns = [
@@ -74,6 +73,12 @@ export default function DataGridTable() {
     {
       field: "created_at",
       headerName: "Created_at",
+      width: 220,
+      editable: false,
+    },
+    {
+      field: "technologies",
+      headerName: "Technologies",
       width: 220,
       editable: false,
     },
@@ -116,7 +121,7 @@ export default function DataGridTable() {
       }}
     >
       <DataGrid
-        rows={technology}
+        rows={project}
         columns={columns}
         editMode="row"
         rowModesModel={rowModesModel}

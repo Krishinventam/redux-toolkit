@@ -3,14 +3,14 @@ import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import TextFields from "../Utils/TextField";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  addTechnology,
-  editTechnology,
-  getTechnology,
-} from "../redux-toolkit/slices/TechnologySlice";
+  addProject,
+  editProject,
+  getProject,
+} from "../redux-toolkit/slices/ProjectTableSlice";
 
-const Technologyform = () => {
+const ProjectForm = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,21 +20,28 @@ const Technologyform = () => {
   const variable = watch();
   const onSubmit = (newData) => {
     if (!newData.id) {
-      dispatch(addTechnology(variable)).then((res) => {
-        if (!res.error) navigate("/technology");
+      dispatch(addProject(variable)).then((res) => {
+        console.log("res", res);
+        if (!res.error) navigate("/project");
       });
     } else {
-      dispatch(editTechnology(newData)).then((res) => {
-        if (!res.error) navigate("/technology");
+      dispatch(editProject(newData)).then((res) => {
+        if (!res.error) navigate("/project");
       });
     }
   };
 
   useEffect(() => {
-    dispatch(getTechnology({ id })).then((res) => {
-      !res.error && reset(res.payload.data);
+    dispatch(getProject({id})).then((res) => {
+       (!res.error) && reset(res.payload.data);
+
     });
   }, [id]);
+  // useEffect(() =>{
+  //   dispatch(editProject({id})).then((res) =>{
+  //     (!res.error) && reset(res.payload.data)
+  //   })
+  // },[id])
 
   return (
     <Stack
@@ -44,7 +51,7 @@ const Technologyform = () => {
         padding: "180px",
       }}
     >
-      <Typography variant="h4"> Technology Form</Typography>
+      <Typography variant="h4"> Project Form</Typography>
       <FormProvider {...methods}>
         <Box sx={{ alignItems: "center" }}>
           <form
@@ -57,8 +64,14 @@ const Technologyform = () => {
               direction="row"
               sx={{ mt: 2, alignItems: "center", width: "350px" }}
             >
-              <TextFields name="name" required type="text" />
+              <TextFields name="name" label="Name" required type="text" />
               <TextFields name="created_at" required type="date" />
+              <TextFields
+                name="technologies"
+                label="Technologies"
+                required
+                type="text"
+              />
             </Grid>
             <Button
               variant="outlined"
@@ -66,7 +79,7 @@ const Technologyform = () => {
               type="submit"
               sx={{ mt: 1 }}
             >
-              {id === "new" ? "Add Technology" : "Update Technology"}
+              {id === "new" ? "Add Project" : "Update Project"}
             </Button>
           </form>
         </Box>
@@ -75,4 +88,4 @@ const Technologyform = () => {
   );
 };
 
-export default Technologyform;
+export default ProjectForm;
