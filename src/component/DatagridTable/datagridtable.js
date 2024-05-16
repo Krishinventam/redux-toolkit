@@ -49,9 +49,9 @@ export default function DataGridTable() {
     navigate(`/technology/${id || "new"}`);
   };
 
-  const handleDeleteClick = ({id}) => {
-    dispatch(deleteTechnology({ id }));
-    dispatch(fetchTechnology({ id }));
+  const handleDeleteClick = (id) => {
+    dispatch(deleteTechnology({id} ));
+    // dispatch(fetchTechnology( id ));
   };
 
   const columns = [

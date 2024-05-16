@@ -19,7 +19,6 @@ function App() {
             <Route path="/project" element={<ProjectTable />} />
             <Route path="/project/new" element={<ProjectForm />} />
             <Route path="/project/:id" element={<ProjectForm />} />
-
           </Routes>
         </NavigationWrapper>
       </div>

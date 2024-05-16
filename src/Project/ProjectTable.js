@@ -17,7 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 // } from "../../redux-toolkit/slices/TechnologySlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { deleteProject, fetchProject } from "../redux-toolkit/slices/ProjectTableSlice"
+import {
+  deleteProject,
+  fetchProject,
+} from "../redux-toolkit/slices/ProjectTableSlice";
 
 function EditToolbar({ handleNavigate }) {
   return (
@@ -48,7 +51,7 @@ export default function ProjectTable() {
     navigate(`/project/${id || "new"}`);
   };
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = ({ id }) => {
     dispatch(deleteProject({ id }));
     dispatch(fetchProject({ id }));
   };
@@ -100,7 +103,7 @@ export default function ProjectTable() {
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={() => handleDeleteClick(id)}
+            onClick={() => handleDeleteClick({ id })}
             color="inherit"
           />,
         ];

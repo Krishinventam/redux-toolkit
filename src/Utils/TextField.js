@@ -6,7 +6,7 @@ const TextFields = ({
   name,
   label,
   required = false,
-  type = "text" || "number" || "date" ,
+  type = "text" || "number" || "date" || "integer",
   helperText,
   disabled = false
 }) => {

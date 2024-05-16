@@ -11,36 +11,34 @@ const pages = [
 ];
 
 function NavigationBar() {
-const [dropdown, setDropdown] = React.useState('');
- const navigate = useNavigate();
+  const [dropdown, setDropdown] = React.useState("");
+  const navigate = useNavigate();
 
   const handleNav = (route) => {
     navigate(route);
   };
-  const handleChange = (event) =>{
-    setDropdown(event.target.value)
-  }
+  const handleChange = (event) => {
+    setDropdown(event.target.value);
+  };
 
   return (
     <FormControl fullWidth>
-    <Stack flexDirection={"row"} gap={2}>
-        
-      {pages.map((page) => (
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            sx={{ cursor: "pointer" }}
-            onClick={() => handleNav(page.route)}
-            onChange={handleChange}
-          >
-            {page?.label}
-            <ArrowDropDownIcon />
-          </Typography>
-        </Toolbar>
-      ))}
-    </Stack>
+      <Stack flexDirection={"row"} gap={2}>
+        {pages.map((page) => (
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              sx={{ cursor: "pointer" }}
+              onClick={() => handleNav(page.route)}
+              onChange={handleChange}
+            >
+              {page?.label}
+              <ArrowDropDownIcon />
+            </Typography>
+          </Toolbar>
+        ))}
+      </Stack>
     </FormControl>
-
   );
 }
 export default NavigationBar;

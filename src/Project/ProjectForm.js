@@ -32,16 +32,10 @@ const ProjectForm = () => {
   };
 
   useEffect(() => {
-    dispatch(getProject({id})).then((res) => {
-       (!res.error) && reset(res.payload.data);
-
+    dispatch(getProject({ id })).then((res) => {
+      !res.error && reset(res.payload.data);
     });
   }, [id]);
-  // useEffect(() =>{
-  //   dispatch(editProject({id})).then((res) =>{
-  //     (!res.error) && reset(res.payload.data)
-  //   })
-  // },[id])
 
   return (
     <Stack
@@ -70,7 +64,7 @@ const ProjectForm = () => {
                 name="technologies"
                 label="Technologies"
                 required
-                type="text"
+                type='text'
               />
             </Grid>
             <Button
